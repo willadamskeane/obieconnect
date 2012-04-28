@@ -31,7 +31,7 @@ class ExampleForm(ModelForm):
         u = User.objects.create_user(new_data['username'],
                                      new_data['email'],
                                      new_data['password1'])
-        u.is_active = False
+        u.is_active = True
         u.save()
         return u
         
