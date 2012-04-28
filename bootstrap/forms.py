@@ -3,6 +3,7 @@ from django.forms import ModelForm
 from django.core.validators import validate_email
 
 from bootstrap.models import ExampleFields
+from bootstrap.models import User
 
 class ExampleForm(ModelForm):
     username = forms.CharField(
