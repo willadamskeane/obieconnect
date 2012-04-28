@@ -43,8 +43,10 @@ def ajax_example(request):
     context = {}
     if request.POST:
         form = ExampleForm(request.POST)
+        new_data = request.POST.copy()
         if form.is_valid():
             #Do Something, e.g. save, send an email
+            new_user = form.save(new_data)
             template = "bootstrap/example_form_success.html"
             success = True
         else:
