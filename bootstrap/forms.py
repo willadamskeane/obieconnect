@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from django.core.validators import validate_email
+from django.contrib.auth.models import User
 
 from bootstrap.models import ExampleFields
 from bootstrap.models import User
@@ -25,6 +26,14 @@ class ExampleForm(ModelForm):
             raise forms.ValidationError("Passwords must match.")
     
         return cleaned_data
+    
+    def save(self, new_data):
+        u = User.objects.create_user(new_data['username'],
+                                     new_data['email'],
+                                     new_data['password1'])
+        u.is_active = False
+        u.save()
+        return u
         
 class AjaxAutoComplete(forms.Form):
     name = forms.CharField(help_text="Enter a course name, e.g Psychology 100",
